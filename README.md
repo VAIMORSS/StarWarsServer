@@ -2,7 +2,7 @@
     npm install
 
 ### run the server
-    node index.js or nodemon index.js
+    npm start
 
 ### server will be running on local host 8080
 used properies
