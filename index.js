@@ -17,43 +17,6 @@ app.get('/:id',async (req, res) => {
     }
 });
 
-
-const getPersonByUrl = (url) =>{
-    return new Promise ( resolve=> resolve(getData(url)
-        .then(function (response) {
-             
-            
-            getData(response.body.homeworld)
-                .then((r_tempHomeWorld) => {
-                    response.body.homeworld = r_tempHomeWorld.body;
-
-                    getData(response.body.species[0])
-                        .then((r_tempSpices) => {
-
-                            response.body.species = r_tempSpices.body;
-                           
-
-                        }).then(()=>{
-                            let tempFilms = [];
-
-                            //maping promises with every film fetch
-                            var actions=response.body.films.map(filmGetter);
-                            var results = Promise.all(actions);
-                            
-                            results.then(data=>{
-                                data.forEach(element => {
-                                    tempFilms.push(element.body)
-                                });  
-                                response.body.films=tempFilms;
-                                
-                            })
-                            
-                        });
-                });
-        })
-    ))
-}
-
 //making promise to fetch data from the API
 const getData = url => {
     return new Promise((resolve,reject)=>{

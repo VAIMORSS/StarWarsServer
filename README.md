@@ -1,12 +1,12 @@
 ### installing dependencies 
     npm install
 
-###run the server
+### run the server
     node index.js or nodemon index.js
 
-###server will be running on local host 8080
+### server will be running on local host 8080
 used properies
-//////////////////
+
 
 swapi API
 got to fetch data
