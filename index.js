@@ -3,7 +3,6 @@ const app = express();
 let got = require('got');
 
 app.get('/:id',async (req, res) => {
-
     const url = `https://swapi.co/api/people/${req.params.id}`;
     try{
          const character = await getData(url);
