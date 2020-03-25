@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const got = require('got');
 const swapi = require('./api/swapi.js');
 
 app.get('/:id',async (req, res) => {
