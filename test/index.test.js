@@ -4,7 +4,7 @@ const testPerson = require('./testPerson.json')
 
 jest.mock('got');
 
-describe('Positive tests', () => {
+describe('App, accepts an id of character and sends back the detrails of the character', () => {
     let response;
 
     beforeEach(async () => {

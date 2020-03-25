@@ -9,9 +9,9 @@ const got = async (url, options) => {
     if (/^https:\/\/swapi.co\/api\/*/.test(url)) {
 
         const path = url.replace('https://swapi.co/api/', '').split('/');
-        const object_id = parseInt(path[1]);
+        const objectId = parseInt(path[1]);
 
-        if (isNaN(object_id)) {
+        if (isNaN(objectId)) {
             Promise.resolve({
                 data: {
                     status: 400,
@@ -22,27 +22,26 @@ const got = async (url, options) => {
 
         switch (path[0]) {
             case 'people':
-                data = people[object_id.toString()];
+                data = people[objectId.toString()];
                 break;
             case 'planets':
-                data = planets[object_id.toString()];
+                data = planets[objectId.toString()];
                 break;
             case 'species':
-                data = species[object_id.toString()];
+                data = species[objectId.toString()];
                 break;
             case 'films':
-                data = films[object_id.toString()];
+                data = films[objectId.toString()];
                 break;
             default:
-                isError = true;
                 break;
         }
 
     }
     if (!data) {
         return Promise.reject({
-            status: 400,
-            error: "Bad request "
+            status: 404,
+            error: "Not found"
         }
         );
     }
