@@ -11,7 +11,7 @@ const got = async (url, options) => {
         const path = url.replace('https://swapi.co/api/', '').split('/');
         const object_id = parseInt(path[1]);
 
-        if (isNaN(object_id) || object_id > 7) {
+        if (isNaN(object_id)) {
             Promise.resolve({
                 data: {
                     status: 400,
