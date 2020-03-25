@@ -11,7 +11,7 @@ app.get('/:id',async (req, res) => {
          const films = await getFilms(character.body.films);
          res.status(200).send({...character.body,homeworld:homeWorld.body,species:species.body,films:films})
     }catch(e){
-        res.status(404).send({"error":"something went wrong"});
+        res.status(404).send({"error":`something went wrong, ${e}`});
     }
 });
 
