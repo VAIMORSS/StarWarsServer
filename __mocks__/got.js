@@ -4,50 +4,34 @@ const species = require('./../assets/species.json');
 const planets = require('./../assets/planets.json');
 
 
-const got = (url, options) => {
-    let data, isError;
+const got = async (url, options) => {
+    let data;
     if (/^https:\/\/swapi.co\/api\/*/.test(url)) {
 
         const path = url.replace('https://swapi.co/api/', '').split('/');
-        const pathNum = parseInt(path[1])-1;
+        const object_id = parseInt(path[1]);
 
-        if (isNaN(pathNum) || pathNum > 7) {
+        if (isNaN(object_id) || object_id > 7) {
             Promise.resolve({
                 data: {
                     status: 400,
                     error: "Bad request "
                 }
-            })
+            });
         }
 
         switch (path[0]) {
             case 'people':
-                if (people[pathNum]) {
-                    data = people[pathNum];
-                } else {
-                    isError = true;
-                }
+                data = people[object_id.toString()];
                 break;
             case 'planets':
-                if (planets[pathNum]) {
-                    data = planets[pathNum];
-                } else {
-                    isError = true;
-                }
+                data = planets[object_id.toString()];
                 break;
             case 'species':
-                if (species[pathNum]) {
-                    data = species[pathNum];
-                } else {
-                    isError = true;
-                }
+                data = species[object_id.toString()];
                 break;
             case 'films':
-                if (films[pathNum]) {
-                    data = films[pathNum];
-                } else {
-                    isError = true;
-                }
+                data = films[object_id.toString()];
                 break;
             default:
                 isError = true;
@@ -55,7 +39,7 @@ const got = (url, options) => {
         }
 
     }
-    if (isError==true) {
+    if (!data) {
         return Promise.reject({
             status: 400,
             error: "Bad request "

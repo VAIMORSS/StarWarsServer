@@ -1,5 +1,5 @@
-[
-  {
+{
+  "1": {
     "name": "Human",
     "classification": "mammal",
     "designation": "sentient",
@@ -60,7 +60,7 @@
     "edited": "2015-04-17T06:59:55.850671Z",
     "url": "https://swapi.co/api/species/1/"
   },
-  {
+  "2": {
     "name": "Droid",
     "classification": "artificial",
     "designation": "sentient",
@@ -91,4 +91,4 @@
     "edited": "2015-04-17T06:59:43.869528Z",
     "url": "https://swapi.co/api/species/2/"
   }
-]
+}

@@ -1,5 +1,5 @@
-[
-  {
+{
+  "1": {
     "name": "Tatooine",
     "rotation_period": "23",
     "orbital_period": "304",
@@ -32,7 +32,7 @@
     "edited": "2014-12-21T20:48:04.175778Z",
     "url": "https://swapi.co/api/planets/1/"
   },
-  {
+  "2": {
     "name": "Alderaan",
     "rotation_period": "24",
     "orbital_period": "364",
@@ -52,7 +52,7 @@
     "edited": "2014-12-20T20:58:18.420000Z",
     "url": "https://swapi.co/api/planets/2/"
   },
-  {
+  "3": {
     "name": "Yavin IV",
     "rotation_period": "24",
     "orbital_period": "4818",
@@ -68,4 +68,4 @@
     "edited": "2014-12-20T20:58:18.421000Z",
     "url": "https://swapi.co/api/planets/3/"
   }
-]
+}
