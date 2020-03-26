@@ -1,54 +1,59 @@
-const people = require('./../assets/people.json');
-const films = require('./../assets/films.json');
-const species = require('./../assets/species.json');
-const planets = require('./../assets/planets.json');
+const fs = require('fs');
 
+/**
+ * data file paths
+ */
+const people = '/../assets/people.json';
+const films = '/../assets/films.json';
+const species = '/../assets/species.json';
+const planets = '/../assets/planets.json';
 
 const got = async (url, options) => {
-    let data;
     if (/^https:\/\/swapi.co\/api\/*/.test(url)) {
 
         const requestedObject = url.replace('https://swapi.co/api/', '').split('/');
-        const objectId = parseInt(requestedObject[1]);
+        const objectId = requestedObject[1];
 
-        if (isNaN(objectId)) {
+        if (isNaN(parseInt(objectId))) {
             return {
                 data: {
-                    status: 400,
-                    error: "Bad request "
+                    status: 404,
+                    error: "Not found"
                 }
             };
         }
 
+        const readJson = (path) => {
+            return new Promise((resolve, reject) => {
+                fs.readFile(__dirname + path, (error, fileData) => {
+                    if (error) {
+                        resolve({
+                            status: 404,
+                            body: 'Not found'
+                        });
+                        console.log(error)
+                    } else {
+                        resolve({
+                            status: 200,
+                            body: (JSON.parse(fileData))[objectId]
+                        });
+                    }
+                });
+            })
+
+        };
+
         switch (requestedObject[0]) {
             case 'people':
-                data = people[objectId.toString()];
-                break;
+                return await readJson(people);
             case 'planets':
-                data = planets[objectId.toString()];
-                break;
+                return await readJson(planets);
             case 'species':
-                data = species[objectId.toString()];
-                break;
+                return await readJson(species);
             case 'films':
-                data = films[objectId.toString()];
-                break;
-            default:
-                break;
-        }
-
-    }
-    if (!data) {
-        return {
-            status: 404,
-            error: "Not found"
+                return await readJson(films);
         }
     }
-
-    return {
-        status: 200,
-        body: data
-    };
 };
 
 
