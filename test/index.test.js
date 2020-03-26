@@ -9,53 +9,53 @@ const testPerson = require('./testPerson.json')
 
 jest.mock('got');
 
-describe('App module test for person with id 1!', () => {
+describe('People endpoint', () => {
     let response;
 
     beforeEach(async () => {
         response = await request(app).get("/1");
     });
 
-    test("response status is okay", async (done) => {
+    it("Should match with response 200 OK", async (done) => {
         expect(response.status).toBe(200);
         done();
     });
 
-    test("the whole object should match with local json", async (done) => {
+    it("Should match with 'Human'", async (done) => {
         expect(response.body.species.name).toEqual('Human');
         done();
     });
 
-    test("the whole object should match with local json", async (done) => {
+    it("Should match with test object", async (done) => {
         expect(response.body).toEqual(testPerson);
         done();
     });
 });
 
 
-describe('App module test for person with id 2!', () => {
+describe('People endpoint', () => {
     let response;
 
     beforeEach(async () => {
         response = await request(app).get("/2");
     });
 
-    test("response status is okay", async (done) => {
+    it("Should match with response 200 OK", async (done) => {
         expect(response.status).toBe(200);
         done();
     });
 
-    test("name of the person fetrched is same", async (done) => {
+    it("Should be same with name", async (done) => {
         expect(response.body.name).toBe('C-3PO');
         done();
     });
 
-    test("length of the film should be same", async (done) => {
+    it("Should match with the length of films", async (done) => {
         expect(response.body.films.length).toBe(6);
         done();
     });
 
-    test("length of the starship should be same", async (done) => {
+    it("Should match with length of starship", async (done) => {
         expect(response.body.starships.length).toBe(0);
         done();
     });
