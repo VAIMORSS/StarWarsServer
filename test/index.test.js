@@ -4,8 +4,8 @@ const testPerson = require('./testPerson.json')
 
 /**
  * In case of need of got module's functionality we can use this newGot!
+ * const newGot = jest.requireActual('got');
  */
-//const newGot = jest.requireActual('got');
 
 jest.mock('got');
 
@@ -21,6 +21,10 @@ describe('App module test for person with id 1!', () => {
         done();
     });
 
+    test("the whole object should match with local json", async (done) => {
+        expect(response.body.species.name).toEqual('Human');
+        done();
+    });
 
     test("the whole object should match with local json", async (done) => {
         expect(response.body).toEqual(testPerson);

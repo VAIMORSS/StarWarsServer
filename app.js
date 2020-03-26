@@ -2,10 +2,6 @@ const express = require('express');
 const app = express();
 const got = require('got');
 
-app.get('/test', (req, res) => {
-
-})
-
 app.get('/:id', async (req, res) => {
     const url = `https://swapi.co/api/people/${req.params.id}`;
     try {
