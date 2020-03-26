@@ -7,7 +7,7 @@ const paths = {
     films: 'films/',
     species: 'species/',
     planet: 'planets/'
-}
+};
 
 
 class Swapi {
@@ -26,40 +26,44 @@ class Swapi {
 
     async getDetailedCharacter(characterId) {
         const url = `${this.baseUrl}${paths.people}${characterId}`;
-        
+
         try {
             const character = await this.get(url);
             const species = await this.get(character.body.species[0]);
             const homeWorld = await this.get(character.body.homeworld);
-            const films = await Promise.all(character.body.films.map(film=>this.get(film)));
-            return { ...character.body, homeworld: homeWorld.body, species: species.body, films: films.map((film)=>film.body) };
+            const films = await Promise.all(character.body.films.map(film => this.get(film)));
+            return { ...character.body, homeworld: homeWorld.body, species: species.body, films: films.map((film) => film.body) };
         } catch (e) {
-            console.log(e)
+            throw e;
         }
     }
 
 
-    // async getCharacter({ id = 0, options = gotDefaultOption, url = null }) {
-    //     url = url || `${this.baseUrl}${paths.people}/${objectId}`;
-    //     const response = await this.get(fullUrl || url, options);
-    //     return response.body;
-    // }
+    async getCharacter(objectId, options = {}) {
+        const url = `${this.baseUrl}${paths.people}/${objectId}`;
+        const params = { ...this.gotDefaultOption, ...options };
+        const response = await this.get(url, params);
+        return response.body;
+    }
 
-    // async getSpecies({ id = 0, options = gotDefaultOption, url = null }) {
-    //     url = url || `${this.baseUrl}${paths.species}/${objectId}`;
-    //     const response = await this.get(fullUrl || url, options);
-    //     return response.body;
-    // }
+    async getSpecies(objectId, options = {}) {
+        const url = `${this.baseUrl}${paths.people}/${objectId}`;
+        const params = { ...this.gotDefaultOption, ...options };
+        const response = await this.get(url, params);
+        return response.body;
+    }
 
-    // async getFilms({ id = 0, options = gotDefaultOption, url = null }) {
-    //     url = url || `${this.baseUrl}${paths.films}/${objectId}`;
-    //     return await this.get(fullUrl || url, options);
-    // }
+    async getFilms(objectId, options = {}) {
+        const url = `${this.baseUrl}${paths.people}/${objectId}`;
+        const params = { ...this.gotDefaultOption, ...options };
+        return await this.get(url, params);
+    }
 
-    // async getHomeworld({ id = 0, options = gotDefaultOption, url = null }) {
-    //     url = url || `${this.baseUrl}${paths.films}/${objectId}`;
-    //     return await this.get(fullUrl || url, options);
-    // }
+    async getHomeworld(objectId, options = {}) {
+        const url = `${this.baseUrl}${paths.people}/${objectId}`;
+        const params = { ...this.gotDefaultOption, ...options };
+        return await this.get(url, params);
+    }
 }
 
 module.exports = new Swapi();
