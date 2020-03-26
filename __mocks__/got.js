@@ -8,8 +8,8 @@ const got = async (url, options) => {
     let data;
     if (/^https:\/\/swapi.co\/api\/*/.test(url)) {
 
-        const path = url.replace('https://swapi.co/api/', '').split('/');
-        const objectId = parseInt(path[1]);
+        const requestedObject = url.replace('https://swapi.co/api/', '').split('/');
+        const objectId = parseInt(requestedObject[1]);
 
         if (isNaN(objectId)) {
             return {
@@ -20,7 +20,7 @@ const got = async (url, options) => {
             };
         }
 
-        switch (path[0]) {
+        switch (requestedObject[0]) {
             case 'people':
                 data = people[objectId.toString()];
                 break;
