@@ -12,12 +12,12 @@ const got = async (url, options) => {
         const objectId = parseInt(path[1]);
 
         if (isNaN(objectId)) {
-            Promise.resolve({
+            return {
                 data: {
                     status: 400,
                     error: "Bad request "
                 }
-            });
+            };
         }
 
         switch (path[0]) {
@@ -39,17 +39,16 @@ const got = async (url, options) => {
 
     }
     if (!data) {
-        return Promise.reject({
+        return {
             status: 404,
             error: "Not found"
         }
-        );
     }
 
-    return Promise.resolve({
+    return {
         status: 200,
         body: data
-    });
+    };
 };
 
 
