@@ -20,7 +20,6 @@ class Swapi {
     }
 
     async get(url, options = this.gotDefaultOption) {
-        console.log("this is not getting called")
         return got(url, options);
     }
 
