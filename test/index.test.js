@@ -2,12 +2,19 @@ const request = require("supertest");
 const app = require('../app.js');
 const testPerson = require('./testPerson.json')
 
+
 /**
  * In case of need of got module's functionality we can use this newGot!
  * const newGot = jest.requireActual('got');
  */
 
-jest.mock('got');
+
+jest.mock('./../api/swapi.js', () => {
+    const Swapi = require('../__mocks__/swapi');
+    return {
+        getDetailedCharacter: (url) => Swapi.getDetailedCharacter(url)
+    }
+});
 
 describe('People endpoint', () => {
     let response;
@@ -45,7 +52,7 @@ describe('People endpoint', () => {
         done();
     });
 
-    it("Should be same with name", async (done) => {
+    it("Should match with name C-3P0", async (done) => {
         expect(response.body.name).toBe('C-3PO');
         done();
     });
