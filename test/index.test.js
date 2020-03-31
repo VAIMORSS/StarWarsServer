@@ -71,7 +71,7 @@ describe('People endpoint', () => {
 
 
 
-test("wrong data test", async (done) => {
+test("Should get response 404 Not found", async (done) => {
     const response = await request(app).get('/a');
     expect(response.status).toBe(404);
     done();
