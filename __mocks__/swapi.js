@@ -1,6 +1,6 @@
 'use strict';
 
-const got = require('got');
+const gotSwapi = require('../__mocks__/gotSwapi.js');
 
 const paths = {
     people: 'people/',
@@ -20,7 +20,7 @@ class Swapi {
     }
 
     async get(url, options = this.gotDefaultOption) {
-        return got(url, options);
+        return gotSwapi.get(url, options);
     }
 
     async getDetailedCharacter(characterId) {
